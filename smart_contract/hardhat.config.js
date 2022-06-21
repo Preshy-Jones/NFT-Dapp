@@ -25,5 +25,9 @@ module.exports = {
       url: process.env.ALCHEMY_RINKEBY_API_KEY,
       accounts: [process.env.METAMASK_PRIVATE_KEY],
     },
+    goerli:{
+      url: process.env.ALCHEMY_GOERLI_API_KEY,
+      accounts: [process.env.METAMASK_PRIVATE_KEY],
+    }
   },
 };
