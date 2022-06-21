@@ -46,6 +46,7 @@ const App = () => {
             Each unique. Each beautiful. Discover your NFT today.
           </p>
           <h1 className="text-white">Total NFTs minted</h1>
+          {/* <pre className="text-white">{JSON.stringify(nFTInfo, null, 2)}</pre> */}
           {nFTInfo.length && (
             <h1 className="text-white">{`${nFTInfo[0]}/${nFTInfo[1]}`}</h1>
           )}

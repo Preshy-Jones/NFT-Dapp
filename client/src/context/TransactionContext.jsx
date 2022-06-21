@@ -32,83 +32,6 @@ export const TransactionsProvider = ({ children }) => {
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("");
 
-  const askContractToMintNft = async () => {
-    try {
-      setIsLoading(true);
-      const { ethereum } = window;
-
-      if (ethereum) {
-        const connectedContract = createEthereumContract();
-
-        let chainId = await ethereum.request({ method: "eth_chainId" });
-        console.log("Connected to chain " + chainId);
-
-        // String, hex code of the chainId of the Rinkebey test network
-        const rinkebyChainId = "0x4";
-        if (chainId === rinkebyChainId) {
-          console.log("Going to pop wallet now to pay gas...");
-          let nftTxn = await connectedContract.makeAnEpicNFT();
-
-          console.log("Mining...please wait.");
-          toast.info("Minting the NFT...", {
-            position: "top-left",
-            autoClose: 18050,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-          await nftTxn.wait();
-
-          console.log(
-            `Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTxn.hash}`
-          );
-          getTotalNFTs();
-          setIsLoading(false);
-          toast.success("NFT Minted!", {
-            position: "top-left",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-          setStatus("success");
-          //          setMessage("");
-        } else {
-          toast.error("You are not connected to the Rinkeby Test Network!", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-          // setMessage("You are not connected to the Rinkeby Test Network!");
-          setStatus("error");
-          return;
-        }
-      } else {
-        console.log("Ethereum object doesn't exist!");
-      }
-    } catch (error) {
-      setStatus("error");
-      toast.error(`${error.message}`, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      console.log(error);
-    }
-  };
-
   const connectWallet = async () => {
     try {
       setIsLoading(true);
@@ -177,11 +100,7 @@ export const TransactionsProvider = ({ children }) => {
         const NFTCountInfo = await connectedContract.getTotalMintedNFTs();
         console.log(NFTCountInfo);
         console.log(NFTCountInfo[0].toNumber(), NFTCountInfo[1].toNumber());
-        setnFTInfo([
-          ...nFTInfo,
-          NFTCountInfo[0].toNumber(),
-          NFTCountInfo[1].toNumber(),
-        ]);
+        setnFTInfo([NFTCountInfo[0].toNumber(), NFTCountInfo[1].toNumber()]);
         console.log(nFTInfo);
       }
     } catch (error) {}
@@ -235,6 +154,83 @@ export const TransactionsProvider = ({ children }) => {
         });
       }
     } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const askContractToMintNft = async () => {
+    try {
+      setIsLoading(true);
+      const { ethereum } = window;
+
+      if (ethereum) {
+        const connectedContract = createEthereumContract();
+
+        let chainId = await ethereum.request({ method: "eth_chainId" });
+        console.log("Connected to chain " + chainId);
+
+        // String, hex code of the chainId of the Rinkebey test network
+        const rinkebyChainId = "0x4";
+        if (chainId === rinkebyChainId) {
+          console.log("Going to pop wallet now to pay gas...");
+          let nftTxn = await connectedContract.makeAnEpicNFT();
+
+          console.log("Mining...please wait.");
+          toast.info("Minting the NFT...", {
+            position: "top-left",
+            autoClose: 18050,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          await nftTxn.wait();
+
+          console.log(
+            `Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTxn.hash}`
+          );
+          await getTotalNFTs();
+          setIsLoading(false);
+          toast.success("NFT Minted!", {
+            position: "top-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          setStatus("success");
+          //          setMessage("");
+        } else {
+          toast.error("You are not connected to the Rinkeby Test Network!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          // setMessage("You are not connected to the Rinkeby Test Network!");
+          setStatus("error");
+          return;
+        }
+      } else {
+        console.log("Ethereum object doesn't exist!");
+      }
+    } catch (error) {
+      setStatus("error");
+      toast.error(`${error.message}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       console.log(error);
     }
   };
