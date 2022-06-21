@@ -16,7 +16,7 @@ contract MyEpicNFT is ERC721URIStorage {
   // Magic given to us by OpenZeppelin to help us keep track of tokenIds.
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIds;
-  uint256 maxNFTs = 10;
+  uint256 maxNFTs = 50;
   struct TotalNFTsStruct {
     uint256 totalMintedNFTs;
     uint256 maxNFTs;
