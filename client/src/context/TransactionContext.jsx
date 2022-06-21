@@ -44,7 +44,7 @@ export const TransactionsProvider = ({ children }) => {
         console.log("Connected to chain " + chainId);
 
         // String, hex code of the chainId of the Rinkebey test network
-        const rinkebyChainId = "0x5";
+        const rinkebyChainId = "0x4";
         if (chainId === rinkebyChainId) {
           console.log("Going to pop wallet now to pay gas...");
           let nftTxn = await connectedContract.makeAnEpicNFT();
