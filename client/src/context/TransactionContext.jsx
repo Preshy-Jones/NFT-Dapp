@@ -222,6 +222,7 @@ export const TransactionsProvider = ({ children }) => {
       }
     } catch (error) {
       setStatus("error");
+      setIsLoading(false);
       toast.error(`${error.message}`, {
         position: "top-right",
         autoClose: 5000,
@@ -270,43 +271,6 @@ export const TransactionsProvider = ({ children }) => {
       }
     };
   }, []);
-
-  // useEffect(() => {
-
-  //   // try {
-  //   const { ethereum } = window;
-  //   let connectedContract;
-  //   const onNewMint = (from, tokenId) => {
-  //     console.log(tokenId);
-  //     console.log(from, tokenId.toNumber());
-  //     alert(
-  //       `Hey there! We've minted your NFT and sent it to your wallet. It may be blank right now. It can take a max of 10 min to show up on OpenSea. Here's the link: https://testnets.opensea.io/assets/${contractAddress}/${tokenId.toNumber()}`
-  //     );
-  //   };
-
-  //   if (ethereum) {
-  //     connectedContract = createEthereumContract();
-
-  //     // THIS IS THE MAGIC SAUCE.
-  //     // This will essentially "capture" our event when our contract throws it.
-  //     // If you're familiar with webhooks, it's very similar to that!
-
-  //     connectedContract.on("NewEpicNFTMinted", onNewMint);
-
-  //     console.log("Setup event listener!");
-  //   } else {
-  //     console.log("Ethereum object doesn't exist!");
-  //   }
-  //   // } catch (error) {
-  //   //   console.log(error);
-  //   // }
-
-  //   return () => {
-  //     if (connectedContract) {
-  //       connectedContract.off("NewEpicNFTMinted", onNewMint);
-  //     }
-  //   };
-  // }, []);
 
   return (
     <TransactionContext.Provider
