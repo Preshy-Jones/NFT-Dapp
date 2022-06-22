@@ -45,11 +45,13 @@ const App = () => {
           <p className="sub-text">
             Each unique. Each beautiful. Discover your NFT today.
           </p>
-          <h1 className="text-white">Total NFTs minted</h1>
-          {/* <pre className="text-white">{JSON.stringify(nFTInfo, null, 2)}</pre> */}
-          {nFTInfo.length && (
-            <h1 className="text-white">{`${nFTInfo[0]}/${nFTInfo[1]}`}</h1>
-          )}
+          <div className="text-white text-[2em] font-luckiest">
+            <h1>Total NFTs minted:</h1>
+            {/* <pre className="text-white">{JSON.stringify(nFTInfo, null, 2)}</pre> */}
+            {nFTInfo.length && (
+              <h1 className="text-white">{`${nFTInfo[0]}/${nFTInfo[1]}`}</h1>
+            )}
+          </div>
 
           {status && status !== "error" && nftLinkInfo && (
             <div className="my-2">
