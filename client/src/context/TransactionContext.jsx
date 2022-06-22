@@ -29,7 +29,7 @@ export const TransactionsProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [nFTInfo, setnFTInfo] = useState([]);
-  const [message, setMessage] = useState("");
+  const [nftLinkInfo, setNftLinkInfo] = useState(null);
   const [status, setStatus] = useState("");
 
   const connectWallet = async () => {
@@ -161,6 +161,7 @@ export const TransactionsProvider = ({ children }) => {
   const askContractToMintNft = async () => {
     try {
       setIsLoading(true);
+      setStatus("");
       const { ethereum } = window;
 
       if (ethereum) {
@@ -202,7 +203,7 @@ export const TransactionsProvider = ({ children }) => {
             progress: undefined,
           });
           setStatus("success");
-          //          setMessage("");
+          //          setNftLink("");
         } else {
           toast.error("You are not connected to the Rinkeby Test Network!", {
             position: "top-right",
@@ -213,7 +214,7 @@ export const TransactionsProvider = ({ children }) => {
             draggable: true,
             progress: undefined,
           });
-          // setMessage("You are not connected to the Rinkeby Test Network!");
+          // setNftLink("You are not connected to the Rinkeby Test Network!");
           setStatus("error");
           return;
         }
@@ -243,9 +244,10 @@ export const TransactionsProvider = ({ children }) => {
     const onNewMint = (from, tokenId) => {
       console.log(tokenId);
       console.log(from, tokenId.toNumber());
-      setMessage(
-        `Hey there! We've minted your NFT and sent it to your wallet. It may be blank right now. It can take a max of 10 min to show up on OpenSea. Here's the link: https://testnets.opensea.io/assets/${contractAddress}/${tokenId.toNumber()}`
-      );
+      setNftLinkInfo({
+        contractAddress,
+        tokenId,
+      });
     };
 
     if (ethereum) {
@@ -280,7 +282,7 @@ export const TransactionsProvider = ({ children }) => {
         isLoading,
         nFTInfo,
         status,
-        message,
+        nftLinkInfo,
         askContractToMintNft,
         setupEventListener,
       }}
