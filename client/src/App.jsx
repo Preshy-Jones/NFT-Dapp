@@ -51,8 +51,8 @@ const App = () => {
             <h1 className="text-white">{`${nFTInfo[0]}/${nFTInfo[1]}`}</h1>
           )}
 
-          {status && status !=='error' && (
-            <div className='my-2'>
+          {status && status !== "error" && nftLinkInfo && (
+            <div className="my-2">
               <h2 className="text-white font-elite text-[2em]">
                 {" "}
                 Hey there! We've minted your NFT and sent it to your wallet. It

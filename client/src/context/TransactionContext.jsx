@@ -29,7 +29,10 @@ export const TransactionsProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [nFTInfo, setnFTInfo] = useState([]);
-  const [nftLinkInfo, setNftLinkInfo] = useState(null);
+  const [nftLinkInfo, setNftLinkInfo] = useState({
+    contractAddress: "",
+    tokenId: "",
+  });
   const [status, setStatus] = useState("");
 
   const connectWallet = async () => {
