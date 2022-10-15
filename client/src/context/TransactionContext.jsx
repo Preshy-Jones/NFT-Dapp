@@ -171,7 +171,7 @@ export const TransactionsProvider = ({ children }) => {
         console.log("Connected to chain " + chainId);
 
         // String, hex code of the chainId of the Rinkebey test network
-        const rinkebyChainId = "0x4";
+        const rinkebyChainId = "0x5";
         if (chainId === rinkebyChainId) {
           console.log("Going to pop wallet now to pay gas...");
           let nftTxn = await connectedContract.makeAnEpicNFT();
@@ -205,7 +205,7 @@ export const TransactionsProvider = ({ children }) => {
           setStatus("success");
           //          setNftLink("");
         } else {
-          toast.error("You are not connected to the Rinkeby Test Network!", {
+          toast.error("You are not connected to the Goerli Test Network!", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -214,7 +214,8 @@ export const TransactionsProvider = ({ children }) => {
             draggable: true,
             progress: undefined,
           });
-          // setNftLink("You are not connected to the Rinkeby Test Network!");
+          setIsLoading(false);
+           // setNftLink("You are not connected to the Rinkeby Test Network!");
           setStatus("error");
           return;
         }
